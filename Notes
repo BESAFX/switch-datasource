@@ -1,0 +1,6 @@
+Creating network for (RabbitMQ - Postgres - Jasper Server - MariaDB):
+>> docker network create --subnet=172.66.0.0/16 switch_network
+
+Creating instance for postgres:
+>> docker run -d -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=admin --name switch_postgres --net switch_network --ip 172.66.0.10 postgres:11
+

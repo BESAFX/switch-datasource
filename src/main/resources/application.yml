@@ -1,0 +1,57 @@
+---
+# default properties that will be applied with all profiles.
+spring:
+  profiles:
+    active: dev
+  application:
+    name: switch
+  datasource:
+    initialization-mode: always
+    tomcat:
+      test-while-idle: true
+      validation-query: SELECT 1
+  jackson:
+    serialization:
+      indent_output: true
+  jpa:
+    properties:
+      hibernate:
+        check_nullability: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+---
+server:
+  port: 6000
+---
+# profile: dev
+spring:
+  profiles: dev
+  jpa:
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    username: admin
+    password: admin
+    url: jdbc:postgresql://172.66.0.10:5432/admin
+logPath: ${HOME}/logs
+---
+# profile: prod
+spring:
+  profiles: dev
+  jpa:
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+  datasource:
+    driverClassName: org.postgresql.Driver
+    username: admin
+    password: admin
+    url: jdbc:postgresql://172.40.0.10:5432/admin
+logPath: ${HOME}/logs
